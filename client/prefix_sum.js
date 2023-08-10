@@ -1,6 +1,6 @@
 import { EngineContext } from "./EngineContext.js"
 
-const WORKGROUP_SIZE = 256;
+const WORKGROUP_SIZE = 64;
 const WORKGROUP_SIZE_2x = WORKGROUP_SIZE * 2;
 
 function get_shader1(workgroup_size = WORKGROUP_SIZE)
@@ -80,13 +80,9 @@ fn main(@builtin(local_invocation_id) LocalInvocationID : vec3<u32>)
         {
             j--;    
             var state = 0;
-            while(true)
+            while(state<1)
             {
-                state = atomicLoad(&bWGState[j*3]);                
-                if (state>0) 
-                {                   
-                    break;
-                }
+                state = atomicLoad(&bWGState[j*3]);
             }
             
             if (state==2)
