@@ -94,7 +94,7 @@ fn main(@builtin(local_invocation_id) LocalInvocationID : vec3<u32>)
             {
                 s_inclusive_prefix+= atomicLoad(&bWGState[j*3 + 1]);
             }
-        }         
+        }
 
         atomicStore(&bWGState[blockIdx*3 + 2], s_buf[${workgroup_size_2x} - 1] + s_inclusive_prefix);
         atomicStore(&bWGState[blockIdx*3], 2);
